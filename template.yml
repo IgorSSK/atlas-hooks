@@ -1,0 +1,40 @@
+Globals:
+    Function:
+        Runtime: nodejs14.x
+        Timeout: 180
+        MemorySize: 512
+
+Resources:
+    StartInstance:
+        Type: AWS::Serverless::Function
+        Properties:
+            FunctionName: GameCenter.WebHooks.StartInstance
+            Handler: build/src/application/functions/startInstance.handler
+            Events:
+                ApiEvent:
+                    Type: Api
+                    Properties:
+                        Method: post
+                        Path: /start-instance
+    StopInstance:
+        Type: AWS::Serverless::Function
+        Properties:
+            FunctionName: GameCenter.WebHooks.StopInstance
+            Handler: build/src/application/functions/stopInstance.handler
+            Events:
+                ApiEvent:
+                    Type: Api
+                    Properties:
+                        Method: post
+                        Path: /stop-instance
+    Discord:
+        Type: AWS::Serverless::Function
+        Properties:
+            FunctionName: GameCenter.WebHooks.Discord
+            Handler: build/src/application/functions/discord.handler
+            Events:
+                ApiEvent:
+                    Type: Api
+                    Properties:
+                        Method: post
+                        Path: /discord
